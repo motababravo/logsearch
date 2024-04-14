@@ -10,9 +10,9 @@ import javax.servlet.annotation.WebServlet;
 @WebServlet("/*")
 public class LogSearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String logFilePath = "/opt/service/logs/maintenance/csfe-js.log";
+        String logFilePath = "/path/to/large.log";
         int numLinesToCheck = 200;
-        String searchString = "SignResult=1306";
+        String searchString = "Error = String";
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
