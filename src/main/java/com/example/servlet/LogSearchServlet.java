@@ -10,9 +10,9 @@ import javax.servlet.annotation.WebServlet;
 @WebServlet("/*")
 public class LogSearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String logFilePath = "/path/to/large.log";
+        String logFilePath = "/opt/service/logs/maintenance/csfe-js.log";
         int numLinesToCheck = 200;
-        String searchString = "Error = String";
+        String[] searchStrings = {"SignResult=1306", "OTPResult=1412", "SignResult=1410"};
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
@@ -28,10 +28,12 @@ public class LogSearchServlet extends HttpServlet {
                 int currentByte = file.read();
                 if (currentByte == '\n') {
                     String line = lastLines.reverse().toString();
-                    if (line.contains(searchString)) {
-                        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                        out.println("<h1>Error detected in log file</h1>");
-                        return;
+                    for (String searchString : searchStrings) {
+                        if (line.contains(searchString)) {
+                            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                            out.println("<h1>Error detected in log file</h1>");
+                            return;
+                        }
                     }
                     lastLines.setLength(0); // Clear StringBuilder for next line
                     linesRead++;
