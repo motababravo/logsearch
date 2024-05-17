@@ -10,9 +10,9 @@ import javax.servlet.annotation.WebServlet;
 @WebServlet("/*")
 public class LogSearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String logFilePath = "/opt/service/logs/maintenance/csfe-js.log";
+        String logFilePath = "/opt/service/logs/maintenance/app.log";
         int numLinesToCheck = 200;
-        String[] searchStrings = {"SignResult=1306", "OTPResult=1412", "SignResult=1410"};
+        String[] searchStrings = {"DeviceResult=1010", "TempResult=2020", "BodyResult=3030"};
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
