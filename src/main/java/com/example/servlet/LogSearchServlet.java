@@ -35,7 +35,7 @@ public class LogSearchServlet extends HttpServlet {
                             return;
                         }
                     }
-                    lastLines.setLength(0); // Clear StringBuilder for next line
+                    lastLines.setLength(0);
                     linesRead++;
                 } else if (currentByte != '\r') {
                     lastLines.append((char) currentByte);
